@@ -14,7 +14,7 @@
 # Awwww. #
 
 !SLIDE
-# Let's build a site with kitteh pix! #
+# Let's build a site with kitteh pix! lol! #
 
 !SLIDE
 # and thumbnails! #
@@ -151,7 +151,7 @@
     # URL, waitwhat?
 
 !SLIDE
-# Middleware #
+# Middleware, ZOMG! #
 
 !SLIDE
 
@@ -168,14 +168,14 @@
 !SLIDE
 
     @@@ ruby
-    > df.store File.new('kitteh1.jpg')
-     => "2011/05/11/14_15_29_375_kitteh1.jpg" 
+    > df.store File.new('kitteh.jpg')
+     => "2011/05/11/14_15_29_375_kitteh.jpg" 
 
 !SLIDE
 
     @@@ ruby
     > img = df.fetch
-          "2011/05/11/14_15_29_375_kitteh1.jpg"
+          "2011/05/11/14_15_29_375_kitteh.jpg"
      => #<Dragonfly::Job:0x00000103df6f98 ...> 
 
     > img.url
@@ -210,7 +210,7 @@
     @@@ ruby
     class Kitteh < ActiveRecord::Base
       image_accessor :picture
-      # needs picture_uid (string)
+      # assumes picture_uid (string)
     end
     
     @kitteh.picture = File.new('kitteh.jpg')
