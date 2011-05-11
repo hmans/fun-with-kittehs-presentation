@@ -48,6 +48,11 @@
     # kitteh pix lol!
     
     rake paperclip:refresh
+    
+    # zzZz
+    #       zZzzZ
+    #                zzZzzZ
+    #   zzzZzz
 
 !SLIDE
 # CarrierWave
@@ -62,7 +67,7 @@
       mount_uploader :picture, PictureUploader
     end
     
-    # Eh?
+    # What?
 
 !SLIDE
     @@@ ruby
@@ -76,7 +81,7 @@
       end
       
       # View properties in an upload
-      # storage class? ORLY ORLY ORLY?
+      # storage class? ORLYRLYRLY?
     end
 
 !SLIDE
@@ -86,6 +91,11 @@
 
     # "This uses a naive approach which
     # will re-upload and process all versions."
+    #
+    #      ...zZzzzZzz...
+
+!SLIDE
+# STOP.
 
 !SLIDE center
 # Kitteh pix is SIRIUZ BIZNIZ.
@@ -105,7 +115,7 @@
 
 !SLIDE bullets
 # ...thumbnailed on the fly! #
-* so our developers can mess around with thumbnail sizes without running a migration on a million pix
+* so our developers can mess around with thumbnail sizes without running a migration on millions of pix.
 
 !SLIDE bullets
 # ...under control of the view layer! #
@@ -215,3 +225,35 @@
     = image_tag @kitteh.picture
                   .thumb('200x200').url
 
+!SLIDE bullets
+# Caching is your duty
+* Rack::Cache, Varnish, ...
+
+!SLIDE bullets
+# ...or serve everything off S3
+* Useful on Heroku, since its Varnish isn't really all that awesome
+
+!SLIDE
+
+    @@@ ruby
+    app = Dragonfly[:images].configure do |c|
+      c.datastore =
+        Dragonfly::DataStorage::S3DataStore.new
+
+      c.datastore.configure do |d|
+        # ... S3 configuration ...
+      end
+
+      c.define_url do |app, job, opts|
+        Thumb.url_for_job(job)
+        # Thumb also takes care of
+        # S3 expiry.
+      end
+    end
+
+!SLIDE bullets
+* (probably coming soon as a Dragonfly plugin)
+
+!SLIDE bullets
+# The end.
+* Any questions?
